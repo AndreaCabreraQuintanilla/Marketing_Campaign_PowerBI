@@ -1,0 +1,140 @@
+﻿DEFINE 
+---- MODEL MEASURES BEGIN ----
+MEASURE DAX_Medidas[MaxProdDiaMaxVentas] = 
+CALCULATE (
+    [TotalProductos],
+    TOPN ( 1, VALUES ( d_Calendario[Fecha] ), [TotalProductos] )
+)
+MEASURE DAX_Medidas[PorcentajeCampaña1] = 
+(
+    DIVIDE (
+        SUM ( 'f_CampañasMarketing'[Campaña1] ) * 100,
+        [TotalAceptacionCampañas]
+    )
+)
+MEASURE DAX_Medidas[PorcentajeCampaña2] = 
+(
+    DIVIDE (
+        SUM ( 'f_CampañasMarketing'[Campaña2] ) * 100,
+        [TotalAceptacionCampañas]
+    )
+)
+MEASURE DAX_Medidas[PorcentajeCampaña3] = 
+(
+    DIVIDE (
+        SUM ( 'f_CampañasMarketing'[Campaña3] ) * 100,
+        [TotalAceptacionCampañas]
+    )
+)
+MEASURE DAX_Medidas[PorcentajeCampaña4] = 
+(
+    DIVIDE (
+        SUM ( 'f_CampañasMarketing'[Campaña4] ) * 100,
+        [TotalAceptacionCampañas]
+    )
+)
+MEASURE DAX_Medidas[PorcentajeCampaña5] = 
+(
+    DIVIDE (
+        SUM ( 'f_CampañasMarketing'[Campaña5] ) * 100,
+        [TotalAceptacionCampañas]
+    )
+)
+MEASURE DAX_Medidas[PorcentajeCarne] = 
+( DIVIDE ( SUM ( 'f_CampañasMarketing'[Carne] ) * 100, [TotalProductos] ) )
+MEASURE DAX_Medidas[PorcentajeDulces] = 
+( DIVIDE ( SUM ( 'f_CampañasMarketing'[Dulces] ) * 100, [TotalProductos] ) )
+MEASURE DAX_Medidas[PorcentajeFruta] = 
+( DIVIDE ( SUM ( 'f_CampañasMarketing'[Fruta] ) * 100, [TotalProductos] ) )
+MEASURE DAX_Medidas[PorcentajeJoyeria] = 
+( DIVIDE ( SUM ( 'f_CampañasMarketing'[Joyeria] ) * 100, [TotalProductos] ) )
+MEASURE DAX_Medidas[PorcentajePescado] = 
+( DIVIDE ( SUM ( 'f_CampañasMarketing'[Pescado] ) * 100, [TotalProductos] ) )
+MEASURE DAX_Medidas[PorcentajeVino] = 
+( DIVIDE ( SUM ( 'f_CampañasMarketing'[Vino] ) * 100, [TotalProductos] ) )
+MEASURE DAX_Medidas[ProductosPorCliente] = 
+ROUND ( DIVIDE ( [TotalProductos], [TotalClientes], 0 ), 0 )
+MEASURE DAX_Medidas[PromedioDescuento] = 
+AVERAGE ( 'f_CampañasMarketing'[DescuentoCompra] )
+MEASURE DAX_Medidas[PromedioDiasUltimaCompra] = 
+AVERAGE ( 'f_CampañasMarketing'[UltimaCompra] )
+MEASURE DAX_Medidas[PromedioHijosAdolescentes] = 
+AVERAGE ( 'f_CampañasMarketing'[HijosAdolescentes] )
+
+MEASURE DAX_Medidas[PromedioHijosHogar] = 
+AVERAGE ( 'f_CampañasMarketing'[HijosHogar] )
+
+MEASURE DAX_Medidas[PromedioHijosPequeños] = 
+AVERAGE ( 'f_CampañasMarketing'[HijosPequeños] )
+
+MEASURE DAX_Medidas[PromedioRenta] = 
+AVERAGE ( 'f_CampañasMarketing'[Renta] )
+MEASURE DAX_Medidas[TotalAceptacionCampañas] = 
+(
+    SUM ( 'f_CampañasMarketing'[Campaña1] )
+        + SUM ( 'f_CampañasMarketing'[Campaña2] )
+        + SUM ( 'f_CampañasMarketing'[Campaña3] )
+        + SUM ( 'f_CampañasMarketing'[Campaña4] )
+        + SUM ( 'f_CampañasMarketing'[Campaña5] )
+)
+MEASURE DAX_Medidas[TotalCampaña1] = 
+CALCULATE (
+    SUM ( 'f_CampañasMarketing'[Campaña1] ),
+    'f_CampañasMarketing'[Campaña1] = 1
+)
+MEASURE DAX_Medidas[TotalCampaña2] = 
+CALCULATE (
+    SUM ( 'f_CampañasMarketing'[Campaña2] ),
+    'f_CampañasMarketing'[Campaña2] = 1
+)
+MEASURE DAX_Medidas[TotalCampaña3] = 
+CALCULATE (
+    SUM ( 'f_CampañasMarketing'[Campaña3] ),
+    'f_CampañasMarketing'[Campaña3] = 1
+)
+MEASURE DAX_Medidas[TotalCampaña4] = 
+CALCULATE (
+    SUM ( 'f_CampañasMarketing'[Campaña4] ),
+    'f_CampañasMarketing'[Campaña4] = 1
+)
+MEASURE DAX_Medidas[TotalCampaña5] = 
+CALCULATE (
+    SUM ( 'f_CampañasMarketing'[Campaña5] ),
+    'f_CampañasMarketing'[Campaña5] = 1
+)
+
+MEASURE DAX_Medidas[TotalCampañaRespuesta] = 
+CALCULATE (
+    SUM ( 'f_CampañasMarketing'[CampañaRespuesta] ),
+    'f_CampañasMarketing'[CampañaRespuesta] = 1
+)
+MEASURE DAX_Medidas[TotalCarne] = 
+COUNTROWS ( VALUES ( 'f_CampañasMarketing'[Carne] ) )
+MEASURE DAX_Medidas[TotalClientes] = 
+COUNTROWS ( VALUES ( 'f_CampañasMarketing'[IDCliente] ) )
+MEASURE DAX_Medidas[TotalDulces] = 
+COUNTROWS ( VALUES ( 'f_CampañasMarketing'[Dulces] ) )
+MEASURE DAX_Medidas[TotalFruta] = 
+COUNTROWS ( VALUES ( 'f_CampañasMarketing'[Fruta] ) )
+MEASURE DAX_Medidas[TotalJoyeria] = 
+COUNTROWS ( VALUES ( 'f_CampañasMarketing'[Joyeria] ) )
+MEASURE DAX_Medidas[TotalPescado] = 
+COUNTROWS ( VALUES ( 'f_CampañasMarketing'[Pescado] ) )
+
+MEASURE DAX_Medidas[TotalProductos] = 
+(
+    SUM ( 'f_CampañasMarketing'[Carne] ) + SUM ( 'f_CampañasMarketing'[Dulces] )
+        + SUM ( 'f_CampañasMarketing'[Fruta] )
+        + SUM ( 'f_CampañasMarketing'[Joyeria] )
+        + SUM ( 'f_CampañasMarketing'[Pescado] )
+        + SUM ( 'f_CampañasMarketing'[Vino] )
+)
+MEASURE DAX_Medidas[TotalReclamaciones] = 
+CALCULATE (
+    SUM ( 'f_CampañasMarketing'[Reclamaciones] ),
+    'f_CampañasMarketing'[Reclamaciones] = 1
+)
+MEASURE DAX_Medidas[TotalVino] = 
+COUNTROWS ( VALUES ( 'f_CampañasMarketing'[Vino] ) )
+---- MODEL MEASURES END ----
+
